@@ -1,5 +1,5 @@
 spring:
     data:
         mongodb:
-            uri: mongodb+srv://Ezzard96:Ezzard23@cluster0.r5awj.mongodb.net/?retryWrites=true&w=majority
+            uri: mongodb+srv://Ezzard96:<password>@cluster0.r5awj.mongodb.net/?retryWrites=true&w=majority
             database: BANK_OF_CQE
