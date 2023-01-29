@@ -41,7 +41,7 @@ public class AccountController {
     }
 
     public String deleteAccountById(@RequestBody String acct){
-        String acctId = service.deleteAccountById(acct);
+        String acctId = service.deleteAccountByAccountId(acct);
         return "Account Deleted With Id : " + acctId;
     }
 }
