@@ -30,4 +30,10 @@ public class AccountService {
         return repository.findById(acctId).get();
     }
 
+    public String deleteAccountByAccountId(String acctId){
+        repository.deleteById(acctId);
+        return acctId;
+    }
+
+
 }

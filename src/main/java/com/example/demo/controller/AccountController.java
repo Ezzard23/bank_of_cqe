@@ -40,4 +40,8 @@ public class AccountController {
         return "Account Created With Id : " + acct.getId();
     }
 
+    public String deleteAccountById(@RequestBody String acct){
+        String acctId = service.deleteAccountById(acct);
+        return "Account Deleted With Id : " + acctId;
+    }
 }
