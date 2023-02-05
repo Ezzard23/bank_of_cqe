@@ -25,7 +25,7 @@ public class AccountService {
         return repository.findAll();
     }
 
-    //public Account getAccountByAccountId(String acctId){
-   //     return repository.findById(acctId).get();
-   // }
+    public Account getAccountByAccountId(String acctId){
+        return repository.findById(acctId).get();
+    }
 }
