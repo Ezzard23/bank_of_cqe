@@ -27,4 +27,9 @@ public class UserController {
     public User createNewUser(User newUser){
         return service.createUsers(newUser);
     }
+
+    @GetMapping("/api/users/{id}")
+    public User getUserById(String userId){
+        return service.getUserByUserId(userId);
+    }
 }
