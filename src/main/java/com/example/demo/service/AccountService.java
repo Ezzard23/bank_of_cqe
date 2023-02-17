@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Account;
@@ -28,4 +29,11 @@ public class AccountService {
     public Account getAccountByAccountId(String acctId){
         return repository.findById(acctId).get();
     }
+
+    public String deleteAccountByAccountId(String acctId){
+        repository.deleteById(acctId);
+        return acctId;
+    }
+
+
 }
