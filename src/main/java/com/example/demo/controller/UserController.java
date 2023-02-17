@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -37,3 +39,4 @@ public class UserController {
         return service.getUserByUserId(userId);
     }
 }
+
