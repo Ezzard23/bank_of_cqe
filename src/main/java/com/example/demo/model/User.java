@@ -24,6 +24,12 @@ public class User {
     Address mailingAddress;
     List<String> bankAccounts;
     Boolean active;
+    UserCreds userCreds;
+
+    public class UserCreds {
+        String email;
+        String password;
+    }
 
     public class Address {
         String address1;

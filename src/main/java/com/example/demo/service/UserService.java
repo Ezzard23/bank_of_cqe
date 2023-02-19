@@ -29,4 +29,14 @@ public class UserService {
     public User getUserByUserId(String userId){
         return repository.findById(userId).get();
     }
+
+    public String deleteUserByUserId(String UserId){
+         try {
+            repository.deleteById(UserId);
+         }catch(Exception e){
+            System.out.println(e);
+            return "Failed Delete";
+         }
+         return "Completed Deletion";
+    }
 }

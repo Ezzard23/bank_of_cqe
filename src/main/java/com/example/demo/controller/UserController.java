@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,9 +36,14 @@ public class UserController {
         return service.createUsers(newUser);
     }
 
-    @GetMapping("/api/users/{id}")
+    @GetMapping("/api/users/createUser/{id}")
     public User getUserById(@PathVariable String userId){
         return service.getUserByUserId(userId);
+    }
+
+    @DeleteMapping("/api/users/deleteUser/{id}")
+    public String deleteUserById(@RequestBody String Id){
+        return service.deleteUserByUserId(Id);
     }
 }
 
