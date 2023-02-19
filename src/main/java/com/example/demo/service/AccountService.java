@@ -31,8 +31,13 @@ public class AccountService {
     }
 
     public String deleteAccountByAccountId(String acctId){
-        repository.deleteById(acctId);
-        return acctId;
+        try {
+            repository.deleteById(acctId);
+         }catch(Exception e){
+            System.out.println(e);
+            return e.getMessage();
+         }
+         return acctId;
     }
 
 

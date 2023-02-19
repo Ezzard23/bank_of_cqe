@@ -35,8 +35,8 @@ public class UserService {
             repository.deleteById(UserId);
          }catch(Exception e){
             System.out.println(e);
-            return "Failed Delete";
+            return e.getMessage();
          }
-         return "Completed Deletion";
+         return UserId;
     }
 }
