@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.UUID;
 
+import javax.security.auth.login.AccountException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.stereotype.Service;
@@ -37,8 +39,16 @@ public class AccountService {
 
     public String deposit(String acctId, Integer deposit){
         Account acct = repository.findById(acctId).get();
-        Integer newBalance = acct.getBalance() + deposit ;
-        acct.setBalance(newBalance);
+        try{
+            if(deposit > 0){
+                throw new AccountException("Deposit amount must be greater than Zero" + deposit);
+            }else{
+                Integer newBalance = acct.getBalance() + deposit ;
+                acct.setBalance(newBalance);
+            }
+        }catch(AccountException e){
+            System.out.println(e.getMessage());
+        }
         return acctId;
     }
 
@@ -46,13 +56,14 @@ public class AccountService {
         Account acct = repository.findById(acctId).get();
         try{
             if(acct.getBalance() < withdrawl ){
-                throw new Exception();
+                throw new AccountException("Withdrawl is greater than balance" + acct.getBalance());
+            }else{
+                Integer newBalance = acct.getBalance() - withdrawl ;
+                acct.setBalance(newBalance);
             }
-        }catch(Exception e){
-            
+        }catch(AccountException e){
+            System.out.println(e.getMessage());
         }
-        Integer newBalance = acct.getBalance() - withdrawl ;
-        acct.setBalance(newBalance);
         return acctId;
 
     }
