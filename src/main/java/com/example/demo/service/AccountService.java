@@ -35,5 +35,32 @@ public class AccountService {
         return acctId;
     }
 
+    public String deposit(String acctId, Integer deposit){
+        Account acct = repository.findById(acctId).get();
+        Integer newBalance = acct.getBalance() + deposit ;
+        acct.setBalance(newBalance);
+        return acctId;
+    }
+
+    public String withdawl(String acctId, Integer withdrawl){
+        Account acct = repository.findById(acctId).get();
+        try{
+            if(acct.getBalance() < withdrawl ){
+                throw new Exception();
+            }
+        }catch(Exception e){
+            
+        }
+        Integer newBalance = acct.getBalance() - withdrawl ;
+        acct.setBalance(newBalance);
+        return acctId;
+
+    }
+
+    public String transfer(String sendingAcctId, String recievingAcctId){
+        System.out.print(recievingAcctId);
+        return "";
+    }
+
 
 }

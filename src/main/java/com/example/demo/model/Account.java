@@ -17,10 +17,10 @@ public class Account {
     private String id;
     private String type;
     private String withdrawls;
-    private String balance;
+    private Integer balance;
     private String active;
 
-    public Account(String type, String withdrawls, String balance) {
+    public Account(String type, String withdrawls, Integer balance) {
         this.type = type;
         this.withdrawls = withdrawls;
         this.balance = balance;
@@ -45,10 +45,10 @@ public class Account {
     public void setWithdrawls(String withdrawls) {
         this.withdrawls = withdrawls;
     }
-    public String getBalance() {
+    public Integer getBalance() {
         return balance;
     }
-    public void setBalance(String balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
     public String getActive() {
