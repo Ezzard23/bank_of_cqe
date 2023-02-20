@@ -19,13 +19,9 @@ public class AccountService {
     private AccountRepository repository;
     //CRUD
 
-    public Account addAccount(Account acct){
-        Account accts = new Account();
+    public Account addAccount(String type,String withdrawls,Integer initDeposit){
+        Account acct = new Account(type, withdrawls, initDeposit);
         acct.setId(UUID.randomUUID().toString().split("-")[0]);
-        acct.setActive("true");
-        acct.setBalance(1000);
-        acct.setType("Checking");
-        acct.setWithdrawls("true");
         return repository.save(acct);
     }
 

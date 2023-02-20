@@ -39,8 +39,8 @@ public class AccountController {
     
     @PostMapping("/api/addAccount")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createAccount(@RequestBody Account acct){
-        service.addAccount(acct);
+    public String createAccount(@RequestBody String type,String withdrawls,Integer initDeposit){
+        Account acct = service.addAccount(type,withdrawls,initDeposit);
         return "Account Created With Id : " + acct.getId();
     }
 
