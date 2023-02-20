@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -56,6 +59,19 @@ public class Account {
     }
     public void setActive(String active) {
         this.active = active;
+    }
+
+    public static  Object newInstance(String type,String withdrawls,Integer initDeposit) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+        //Constructor[] constr = Account.class.getConstructors();
+        Class classToLoad = Account.class;
+
+        Class[] cArg = new Class[3]; //Our constructor has 3 arguments
+        cArg[0] = String.class; //First argument is of *object* type Long
+        cArg[1] = String.class; //Second argument is of *object* type String
+        cArg[2] = Integer.class; //Third argument is of *primitive* type int
+
+
+        return classToLoad.getDeclaredConstructor(cArg).newInstance(type, withdrawls, initDeposit);
     }
 
     @Override

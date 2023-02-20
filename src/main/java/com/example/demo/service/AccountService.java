@@ -20,7 +20,12 @@ public class AccountService {
     //CRUD
 
     public Account addAccount(Account acct){
+        Account accts = new Account();
         acct.setId(UUID.randomUUID().toString().split("-")[0]);
+        acct.setActive("true");
+        acct.setBalance(1000);
+        acct.setType("Checking");
+        acct.setWithdrawls("true");
         return repository.save(acct);
     }
 
@@ -37,22 +42,24 @@ public class AccountService {
         return acctId;
     }
 
-    public String deposit(String acctId, Integer deposit){
+    public Account deposit(String acctId, Integer deposit){
         Account acct = repository.findById(acctId).get();
         try{
-            if(deposit > 0){
+            if(deposit < 0){
                 throw new AccountException("Deposit amount must be greater than Zero" + deposit);
             }else{
                 Integer newBalance = acct.getBalance() + deposit ;
                 acct.setBalance(newBalance);
+                repository.save(acct);
+                System.out.println(acct);
             }
         }catch(AccountException e){
             System.out.println(e.getMessage());
         }
-        return acctId;
+        return acct;
     }
 
-    public String withdawl(String acctId, Integer withdrawl){
+    public Account withdrawl(String acctId, Integer withdrawl){
         Account acct = repository.findById(acctId).get();
         try{
             if(acct.getBalance() < withdrawl ){
@@ -60,11 +67,12 @@ public class AccountService {
             }else{
                 Integer newBalance = acct.getBalance() - withdrawl ;
                 acct.setBalance(newBalance);
+                repository.save(acct);
             }
         }catch(AccountException e){
             System.out.println(e.getMessage());
         }
-        return acctId;
+        return acct;
 
     }
 
