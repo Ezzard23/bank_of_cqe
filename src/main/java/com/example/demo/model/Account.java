@@ -19,13 +19,13 @@ public class Account {
     @Id
     private String id;
     private String type;
-    private String withdrawls;
+    private Boolean withdrawls;
     private Integer balance;
     private String active;
 
-    public Account(String type, String withdrawls, Integer balance) {
+    public Account(String type, Integer balance) {
         this.type = type;
-        this.withdrawls = withdrawls;
+        this.withdrawls = type.equals("savings") ? false : true;
         this.balance = balance;
         this.active = "true";
         
@@ -42,10 +42,10 @@ public class Account {
     public void setType(String type) {
         this.type = type;
     }
-    public String getWithdrawls() {
+    public Boolean getWithdrawls() {
         return withdrawls;
     }
-    public void setWithdrawls(String withdrawls) {
+    public void setWithdrawls(Boolean withdrawls) {
         this.withdrawls = withdrawls;
     }
     public Integer getBalance() {

@@ -47,12 +47,10 @@ public class AccountController {
         Object obj = new JSONParser().parse(acctString);
         JSONObject jo = (JSONObject) obj;
 
-
         String type = (String) jo.get("type");
-        String withdrawls = (String) jo.get("withdrawls");
         String initDeposit = (String) jo.get("deposit");
 
-        Account acct = service.addAccount(type,withdrawls,Integer.valueOf(initDeposit));
+        Account acct = service.addAccount(type,Integer.valueOf(initDeposit));
         return "Account Created With Id : " + acct.getId();
     }
 

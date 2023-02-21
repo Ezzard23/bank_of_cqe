@@ -19,8 +19,8 @@ public class AccountService {
     private AccountRepository repository;
     //CRUD
 
-    public Account addAccount(String type,String withdrawls,Integer initDeposit){
-        Account acct = new Account(type, withdrawls, initDeposit);
+    public Account addAccount(String type, Integer initDeposit){
+        Account acct = new Account(type, initDeposit);
         acct.setId(UUID.randomUUID().toString().split("-")[0]);
         return repository.save(acct);
     }
@@ -42,7 +42,7 @@ public class AccountService {
         Account acct = repository.findById(acctId).get();
         try{
             if(deposit < 0){
-                throw new AccountException("Deposit amount must be greater than Zero" + deposit);
+                throw new AccountException("Deposit amount must be greater than Zero " + deposit);
             }else{
                 Integer newBalance = acct.getBalance() + deposit ;
                 acct.setBalance(newBalance);
