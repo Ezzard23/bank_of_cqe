@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +56,7 @@ public class AccountController {
     }
 
     @PutMapping("/api/updateBalance")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public Account updateBalance(String acctId,String amount,String operation){
         Account acct = service.getAccountByAccountId(acctId);
         if(acct != null){
@@ -72,7 +73,9 @@ public class AccountController {
         return acct;
     }
 
-    public String deleteAccountById(@RequestBody String acct){
+    @DeleteMapping("/api/deleteAccount/{acct}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteAccountById(@PathVariable String acct){
         String acctId = service.deleteAccountByAccountId(acct);
         return "Account Deleted With Id : " + acctId;
     }
