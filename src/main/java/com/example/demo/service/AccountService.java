@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.security.auth.login.AccountException;
@@ -72,7 +74,20 @@ public class AccountService {
 
     }
 
-    public String transfer(String sendingAcctId, String recievingAcctId){
+    public String transfer(String sendingAcctId, String recievingAcctId,Integer transferAmt){
+        List<Account> accts = new ArrayList<Account>();
+        
+        Account sender = getAccountByAccountId(sendingAcctId);
+        Account reciever = getAccountByAccountId(recievingAcctId);
+
+        if(sender != null && reciever != null){
+            sender.setBalance(sender.getBalance() - transferAmt);
+            reciever.setBalance(sender.getBalance() + transferAmt);
+            repository.saveAll(accts);
+
+        } 
+
+
         System.out.print(recievingAcctId);
         return "";
     }
