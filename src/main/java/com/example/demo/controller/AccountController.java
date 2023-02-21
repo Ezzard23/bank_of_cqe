@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 
 import com.example.demo.model.Account;
 import com.example.demo.service.AccountService;
@@ -39,8 +42,17 @@ public class AccountController {
     
     @PostMapping("/api/addAccount")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createAccount(@RequestBody String type,String withdrawls,Integer initDeposit){
-        Account acct = service.addAccount(type,withdrawls,initDeposit);
+    public String createAccount(@RequestBody String acctString) throws ParseException{
+        
+        Object obj = new JSONParser().parse(acctString);
+        JSONObject jo = (JSONObject) obj;
+
+
+        String type = (String) jo.get("type");
+        String withdrawls = (String) jo.get("withdrawls");
+        String initDeposit = (String) jo.get("deposit");
+
+        Account acct = service.addAccount(type,withdrawls,Integer.valueOf(initDeposit));
         return "Account Created With Id : " + acct.getId();
     }
 
