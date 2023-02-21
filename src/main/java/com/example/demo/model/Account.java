@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,13 +19,13 @@ public class Account {
     @Id
     private String id;
     private String type;
-    private String withdrawls;
-    private String balance;
+    private Boolean withdrawls;
+    private Integer balance;
     private String active;
 
-    public Account(String type, String withdrawls, String balance) {
+    public Account(String type, Integer balance) {
         this.type = type;
-        this.withdrawls = withdrawls;
+        this.withdrawls = type.equals("savings") ? false : true;
         this.balance = balance;
         this.active = "true";
         
@@ -39,16 +42,16 @@ public class Account {
     public void setType(String type) {
         this.type = type;
     }
-    public String getWithdrawls() {
+    public Boolean getWithdrawls() {
         return withdrawls;
     }
-    public void setWithdrawls(String withdrawls) {
+    public void setWithdrawls(Boolean withdrawls) {
         this.withdrawls = withdrawls;
     }
-    public String getBalance() {
+    public Integer getBalance() {
         return balance;
     }
-    public void setBalance(String balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
     public String getActive() {
