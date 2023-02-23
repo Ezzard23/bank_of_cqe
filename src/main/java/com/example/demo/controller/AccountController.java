@@ -28,7 +28,7 @@ import com.example.demo.service.AccountService;
 @RestController
 @RequestMapping
 public class AccountController {
-    private Logger accountlogger (){
+    public static Logger accountlogger (){
         Logger logger = Logger.getLogger(AccountController.class.getName());
         try {
             LogManager.getLogManager().readConfiguration(new FileInputStream("SysLogger.properties"));
@@ -60,7 +60,10 @@ public class AccountController {
 
     @GetMapping("/api/accounts")
     public List<Account> getAccounts(){
+        Logger logger = AccountController.accountlogger();
+        logger.log(Level.INFO, "Test");
         return service.findAllAccounts();
+
     }
     
     @GetMapping("/api/accounts/{id}")
