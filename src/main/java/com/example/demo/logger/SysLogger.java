@@ -1,4 +1,4 @@
-package com.example.logger;
+package com.example.demo.logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class SysLogger {
     
     public static void main(String[] args) {
         try {
-            LogManager.getLogManager().readConfiguration(new FileInputStream("mylogging.properties"));
+            LogManager.getLogManager().readConfiguration(new FileInputStream("SysLogger.properties"));
         } catch (SecurityException | IOException e1) {
             e1.printStackTrace();
         }
@@ -24,16 +24,11 @@ public class SysLogger {
         logger.addHandler(new SysHandler());
         try {
             //FileHandler file name with max size and number of log files limit
-            Handler fileHandler = new FileHandler("/Users/pankaj/tmp/logger.log", 2000, 5);
+            Handler fileHandler = new FileHandler("/Users/cqezz/OneDrive/Desktop/bankAppFrontend/demo", 2000, 5);
             fileHandler.setFormatter(new LogFormatter());
             //setting custom filter for FileHandler
             fileHandler.setFilter(new LogFilter());
             logger.addHandler(fileHandler);
-            
-            for(int i=0; i<1000; i++){
-                //logging messages
-                logger.log(Level.INFO, "Msg"+i);
-            }
             logger.log(Level.CONFIG, "Config data");
         } catch (SecurityException | IOException e) {
             e.printStackTrace();

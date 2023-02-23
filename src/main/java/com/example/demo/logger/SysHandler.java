@@ -1,4 +1,4 @@
-package com.example.logger;
+package com.example.demo.logger;
 
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;

@@ -1,4 +1,4 @@
-package com.example.logger;
+package com.example.demo.logger;
 import java.util.logging.Filter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
