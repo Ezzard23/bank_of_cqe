@@ -17,12 +17,21 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+
+import com.example.demo.logger.*;
 import com.example.demo.model.Account;
 import com.example.demo.service.AccountService;
 
 @RestController
 @RequestMapping
 public class AccountController {
+
+    Logger logger = SysLogger.accountlogger();
+
+
     String TRANSFER = "TRANSFER";
     String DEPOSIT = "DEPOSIT";
     String WITHDRAWL = "WITHDRAWL";
@@ -32,7 +41,9 @@ public class AccountController {
 
     @GetMapping("/api/accounts")
     public List<Account> getAccounts(){
+        logger.log(Level.INFO, "Test");
         return service.findAllAccounts();
+
     }
     
     @GetMapping("/api/accounts/{id}")
