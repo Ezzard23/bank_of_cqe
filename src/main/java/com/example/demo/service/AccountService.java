@@ -11,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import com.example.demo.logger.*;
+
 import com.example.demo.model.Account;
 import com.example.demo.repository.AccountRepository;
 
 @Service
 public class AccountService {
-    
+    Logger logger = SysLogger.accountlogger();
+
     @Autowired
     private AccountRepository repository;
     //CRUD
@@ -49,10 +54,10 @@ public class AccountService {
                 Integer newBalance = acct.getBalance() + deposit ;
                 acct.setBalance(newBalance);
                 repository.save(acct);
-                System.out.println(acct);
+                logger.log(Level.FINE,"Successful Transaction");
             }
         }catch(AccountException e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING,e.getMessage());
         }
         return acct;
     }
@@ -68,7 +73,7 @@ public class AccountService {
                 repository.save(acct);
             }
         }catch(AccountException e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING,e.getMessage());
         }
         return acct;
 
