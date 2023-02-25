@@ -64,8 +64,12 @@ public class AccountService {
 
     public Account withdrawl(String acctId, Integer withdrawl){
         Account acct = repository.findById(acctId).get();
+
         try{
-            if(acct.getBalance() < withdrawl ){
+            if(acct == null) {
+                throw new AccountException("Account not found");
+            }
+            else if(acct.getBalance() < withdrawl ){
                 throw new AccountException("Withdrawl is greater than balance" + acct.getBalance());
             }else{
                 Integer newBalance = acct.getBalance() - withdrawl ;
@@ -74,6 +78,7 @@ public class AccountService {
             }
         }catch(AccountException e){
             logger.log(Level.WARNING,e.getMessage());
+            return acct;
         }
         return acct;
 
@@ -93,7 +98,7 @@ public class AccountService {
         } 
 
 
-        System.out.print(recievingAcctId);
+        logger.log(Level.FINE,"Transaction Successful");
         return "";
     }
 
