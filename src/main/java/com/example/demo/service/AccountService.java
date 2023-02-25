@@ -29,6 +29,7 @@ public class AccountService {
     public Account addAccount(String type, Integer initDeposit){
         Account acct = new Account(type, initDeposit);
         acct.setId(UUID.randomUUID().toString().split("-")[0]);
+        logger.log(Level.FINE, acct.getId());
         return repository.save(acct);
     }
 
@@ -37,6 +38,7 @@ public class AccountService {
     }
 
     public Account getAccountByAccountId(String acctId){
+        logger.log(Level.FINE, "Account Found : "+ acctId);
         return repository.findById(acctId).get();
     }
 
@@ -90,16 +92,27 @@ public class AccountService {
         Account sender = getAccountByAccountId(sendingAcctId);
         Account reciever = getAccountByAccountId(recievingAcctId);
 
-        if(sender != null && reciever != null){
-            sender.setBalance(sender.getBalance() - transferAmt);
-            reciever.setBalance(sender.getBalance() + transferAmt);
-            repository.saveAll(accts);
+        try{
+            if(sender != null && reciever != null){
+                sender.setBalance(sender.getBalance() - transferAmt);
+                reciever.setBalance(sender.getBalance() + transferAmt);
+                repository.saveAll(accts);
 
-        } 
+            }
+            if(sender == null ){
+                throw new AccountException("Sender is not found/Invalid Id");
+            }
+            if(reciever == null){
+                throw new AccountException("Reciever is not found/Invalid Id");
+            }
+        }catch(AccountException e){
+            logger.log(Level.WARNING,e.getMessage());
+            return e.getMessage();
+        }
 
 
         logger.log(Level.FINE,"Transaction Successful");
-        return "";
+        return sender.getId();
     }
 
 

@@ -41,9 +41,7 @@ public class AccountController {
 
     @GetMapping("/api/accounts")
     public List<Account> getAccounts(){
-        logger.log(Level.INFO, "Test");
         return service.findAllAccounts();
-
     }
     
     @GetMapping("/api/accounts/{id}")
