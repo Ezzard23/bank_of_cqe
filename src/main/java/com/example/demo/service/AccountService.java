@@ -54,7 +54,7 @@ public class AccountService {
                 Integer newBalance = acct.getBalance() + deposit ;
                 acct.setBalance(newBalance);
                 repository.save(acct);
-                logger.log(Level.FINE,"Successful Transaction");
+                logger.log(Level.INFO,"Successful Transaction" );
             }
         }catch(AccountException e){
             logger.log(Level.WARNING,e.getMessage());

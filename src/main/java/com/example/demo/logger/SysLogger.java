@@ -24,7 +24,7 @@ public class SysLogger {
         logger.addHandler(new SysHandler());
         try {
             //FileHandler file name with max size and number of log files limit
-            Handler fileHandler = new FileHandler("C:/Users/cqezz/OneDrive/Desktop/bankAppFrontend/demo/src/demo.log", 2000, 5);
+            Handler fileHandler = new FileHandler("C:/Users/cqezz/OneDrive/Desktop/bankAppFrontend/demo/src/demo.txt", 2000, 1);
             fileHandler.setFormatter(new LogFormatter());
             //setting custom filter for FileHandler
             fileHandler.setFilter(new LogFilter());
