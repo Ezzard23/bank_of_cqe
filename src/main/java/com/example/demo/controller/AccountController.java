@@ -69,9 +69,6 @@ public class AccountController {
     public Account updateBalance(String acctId,String amount,String operation){
         Account acct = service.getAccountByAccountId(acctId);
         if(acct != null){
-            if(operation.equals(TRANSFER)){
-
-            }
             if(operation.equals(DEPOSIT)){
                 service.deposit(acctId, Integer.valueOf(amount));
             }
@@ -80,6 +77,17 @@ public class AccountController {
             }
         }
         return acct;
+    }
+
+    @PutMapping("/api/transferBalance")
+    @ResponseStatus(HttpStatus.OK)
+    public Account transferBalance(String acctId,String recieverId,Integer amount){
+        Account acct = service.getAccountByAccountId(acctId);
+        if(acct != null){
+            service.transfer(acctId, recieverId, amount);
+        }
+        return acct;
+
     }
 
     @DeleteMapping("/api/deleteAccount/{acct}")
